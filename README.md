@@ -2,7 +2,13 @@
 
 ## Sesiones de Clase
 
-[Clase Septiembre 6](https://cdrive.page.link/3PnbzHAGumSYEcQP7)
+| Agosto     | Septiembre | Octubre | Noviembre|
+|------------|------------|------------|------------|
+| Subtema 1  |[Sept.6](https://cdrive.page.link/3PnbzHAGumSYEcQP7)| Subtema 3  | Subtema 4  |
+| Subtema 5  |[Sept.13](https://cdrive.page.link/3PnbzHAGumSYEcQP7)| Subtema 7  | Subtema 8  |
+| Subtema 9  | Subtema 10 | Subtema 11 | Subtema 12 |
+|[Ago.30](https://cdrive.page.link/3PnbzHAGumSYEcQP7)| Subtema 14 | Subtema 15 | Subtema 16 |
+
 ## Archivos de Clase
 Files up and down : [Claro drive](https://cdrive.page.link/vk8qPRaemUXDh1x7A)
 
