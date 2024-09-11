@@ -12,5 +12,8 @@ Problemas Simio SWAY 1 :  [SWAY 1](https://sway.cloud.microsoft/kNcozsyPkB6yI0iq
 
 File problema 3: [clic Aqui!](https://github.com/drcruzm/simio24/blob/e03c9a3121b95c6c88da7660a8b04337ebad45c5/prob3-tran%2B2.spfx)
 
+## Aula Extendida 
+
+[Aula Extendida](https://view.genially.com/60a2547ac4725c0d3fa42d17)
 
 
