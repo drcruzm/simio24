@@ -12,11 +12,10 @@
 ## Archivos de Clase
 Files up and down : [Claro drive](https://cdrive.page.link/vk8qPRaemUXDh1x7A)
 
-## Material de Clases
-
-Problemas Simio SWAY 1 :  [SWAY 1](https://sway.cloud.microsoft/kNcozsyPkB6yI0iq?ref=Link)
-
-File problema 3: [clic Aqui!](https://github.com/drcruzm/simio24/blob/e03c9a3121b95c6c88da7660a8b04337ebad45c5/prob3-tran%2B2.spfx)
+## Módulo 1: Introducción
+- **Lección 1.1:** [SWAY Prolemas 1-3](https://sway.cloud.microsoft/kNcozsyPkB6yI0iq?ref=Link)
+- **Lección 1.2:** [File problema 3](https://github.com/drcruzm/simio24/blob/e03c9a3121b95c6c88da7660a8b04337ebad45c5/prob3-tran%2B2.spfx)
+- **Lección 1.3:** Ejemplos prácticos
 
 ## Aula Extendida 
 
