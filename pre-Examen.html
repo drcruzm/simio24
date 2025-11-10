@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio de Caso - Revisión de Microscopios</title>
+    <!-- Importar Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Importar la fuente Inter de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Aplicar la fuente Inter como predeterminada */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6; /* Un fondo gris muy claro */
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Contenedor Principal -->
+    <div class="container mx-auto max-w-5xl p-6 sm:p-10">
+
+        <!-- Encabezado -->
+        <header class="text-center mb-10">
+            <h1 class="text-3xl sm:text-4xl font-bold text-red-700">
+                Estación de Revisión de Microscopios con Bucle de Ajuste y Retrabajo Final
+            </h1>
+            <p class="text-lg text-gray-600 mt-2">Estudio de Caso para Simulación de Procesos</p>
+        </header>
+
+        <!-- Contenido Principal -->
+        <main class="space-y-8">
+
+            <!-- 1. Contexto Narrativo -->
+            <section class="bg-white rounded-lg shadow-xl p-6 sm:p-8">
+                <h2 class="text-2xl font-bold text-blue-700 mb-4">Contexto Narrativo</h2>
+                <div class="space-y-3 text-gray-700 leading-relaxed">
+                    <p>Una planta de metrología óptica recibe microscopios (unidad de flujo) para su <strong>revisión, procesamiento, análisis</strong> y, en caso de no conformidades, <strong>ajuste</strong>.</p>
+                    <p>Un microscopio puede regresar al módulo de ajuste hasta <strong>tres veces</strong>.</p>
+                    <p>Si tras el cuarto ajuste no cumple especificación, se enví...a a <strong>Retrabajo Final</strong>.</p>
+                    <p>La gerencia busca equilibrar <strong>tiempos de flujo</strong>, <strong>WIP</strong> y <strong>tasa de aprobación al primer intento (FPY)</strong>, garantizando niveles de servicio y uso eficiente de recursos.</p>
+                </div>
+            </section>
+
+            <!-- 2. Flujo del Proceso y Lógica -->
+            <section class="bg-white rounded-lg shadow-xl p-6 sm:p-8">
+                <h2 class="text-2xl font-bold text-blue-700 mb-4">Flujo del Proceso (Alto Nivel)</h2>
+                
+                <!-- Imagen del Flujo -->
+                <div class="my-4">
+                    <img src="https://i.ibb.co/yFSC7f0H/000601.png" 
+                         alt="Diagrama de flujo del proceso de revisión de microscopios" 
+                         class="rounded-lg shadow-md mx-auto w-full max-w-3xl border border-gray-200"
+                         onerror="this.src='https://placehold.co/800x400/e0e7ff/3341a9?text=Diagrama+de+Flujo+(Imagen+no+encontrada)'; this.alt='Diagrama de flujo no disponible'">
+                </div>
+                
+                <h3 class="text-xl font-semibold text-blue-600 mt-6 mb-3">Notas de Lógica</h3>
+                <ul class="list-disc list-inside pl-4 space-y-2 text-gray-700">
+                    <li>El conteo de reingresos al módulo de Ajuste se lleva por entidad (atributo/estado), <strong>máx. 4</strong>.</li>
+                    <li>Si la entidad <strong>aprueba</strong> en Aná...lisis &rarr; sale del sistema (opcional: empacado).</li>
+                    <li>Si <strong>falla</strong> y lleva <strong>=&lt; 3 ajustes</strong> &rarr; va a Ajuste y luego vuelve a Procesamiento.</li>
+                    <li>Si <strong>falla</strong> y lleva <strong>&gt; 3 ajustes</strong> &rarr; va a Retrabajo Final y luego sale.</li>
+                </ul>
+            </section>
+
+            <!-- 3. Datos de Entrada -->
+            <section class="bg-white rounded-lg shadow-xl p-6 sm:p-8">
+                <h2 class="text-2xl font-bold text-blue-700 mb-4">Datos de Entrada (Distribuciones y Parámetros)</h2>
+                
+                <!-- Sub-sección: Llegadas -->
+                <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2">5.1 Llegadas</h3>
+                <ul class="list-disc list-inside pl-4 space-y-2 text-gray-700">
+                    <li><strong>Horizonte de simulación:</strong> 52 semanas productivas.</li>
+                    <li><strong>Jornada:</strong> Lun–Vie, 8:00–17:00</li>
+                    <li><strong>Patrón de llegadas (por hora):</strong> <span class="font-bold text-purple-700">Tasa 6/h</span></li>
+                </ul>
+
+                <!-- Sub-sección: Tiempos de Proceso -->
+                <h3 class="text-xl font-semibold text-purple-700 mt-6 mb-3">5.2 Tiempos de Proceso por Estación (minutos)</h3>
+                
+                <!-- Grid para Tiempos -->
+                <div class="grid md:grid-cols-2 gap-6 text-gray-700">
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <strong>Recepción (1 operador):</strong>
+                        <ul class="list-disc list-inside pl-2 mt-1">
+                            <li>Triangular(2, 3, 5)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <strong>Análisis (1 analista):</strong>
+                        <ul class="list-disc list-inside pl-2 mt-1">
+                            <li>Triangular(5, 7, 12)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <strong>Procesamiento (2 estaciones paralelas):</strong>
+                        <ul class="list-disc list-inside pl-2 mt-1">
+                            <li><strong>Estación 1:</strong> Lognormal(μ=2.2, σ=0.25)</li>
+                            <li><strong>Estación 2:</strong> Lognormal(μ=2.5, σ=0.25)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <strong>Ajuste (2 técnicos):</strong>
+                        <ul class="list-disc list-inside pl-2 mt-1">
+                            <li><strong>Técnico 1:</strong> Triangular(6, 9, 16)</li>
+                            <li><strong>Técnico 2:</strong> Triangular(7, 11, 18)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Alerta de Retrabajo Final -->
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6 rounded-r-lg">
+                    <p class="font-semibold text-yellow-800">En caso de no aprobar el 3er reajuste va a:</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <strong>Retrabajo Final (1 especialista):</strong>
+                    <ul class="list-disc list-inside pl-2 mt-1 text-gray-700">
+                        <li>Normal(25, 2.1)</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 4. Recursos y Reglas -->
+            <!-- Grid para dos columnas en pantallas grandes -->
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Recursos y Capacidades -->
+                <section class="bg-white rounded-lg shadow-xl p-6 sm:p-8">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos y Capacidades</h2>
+                    <ul class="list-disc list-inside pl-4 space-y-2 text-gray-700">
+                        <li>Recepción: <strong>1 operador</strong>, cola FIFO sin lí...mite.</li>
+                        <li>Procesamiento: <strong>2 servidores</strong> (paralelos), cola FIFO</li>
+                        <li>Aná...lisis: <strong>1 analista</strong>, cola FIFO</li>
+                        <li>Ajuste: <strong>2 técnicos</strong>, cola FIFO</li>
+                        <li>Retrabajo Final: <strong>1 especialista</strong>, cola FIFO</li>
+                        <li class="pt-2"><strong>Calendario de trabajo:</strong> Todos los recursos siguen el horario 8:00–17:00</li>
+                    </ul>
+                </section>
+
+                <!-- Reglas de Negocio -->
+                <section class="bg-white rounded-lg shadow-xl p-6 sm:p-8">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Reglas de Negocio Adicionales</h2>
+                    <p class="text-gray-700">No hay pérdidas ni abandonos: todo producto termina aprobado o va a Retrabajo Final y sale.</p>
+                </section>
+            </div>
+
+            <!-- 5. KPIs y Parámetros de Corrida -->
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Medidas de Desempeño (KPIs) -->
+                <section class="bg-white rounded-lg shadow-xl p-6 sm:p-8">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Medidas de Desempeño (KPIs)</h2>
+                    <ul class="list-disc list-inside pl-4 space-y-2 text-gray-700">
+                        <li><strong>Tiempo de flujo</strong> (arribo a salida)</li>
+                        <li><strong>Eficiencia del sistema</strong></li>
+                        <li><strong>Utilización</strong> en el Retrabajo final</li>
+                        <li><strong>Total de Reajustes</strong> al final del Turno</li>
+                        <li><strong>% de piezas que llega a Retrabajo Final</strong></li>
+                        <li><strong>Tiempo de espera en cola de procesamiento</strong></li>
+                    </ul>
+                </section>
+
+                <!-- Parámetros de Corrida -->
+                <section class="bg-white rounded-lg shadow-xl p-6 sm:p-8">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Parámetros de Corrida</h2>
+                    <ul class="list-disc list-inside pl-4 space-y-2 text-gray-700">
+                        <li><strong>Warm-up:</strong> 0.5 horas</li>
+                        <li class="font-bold text-red-700"><strong>% de Error en el tiempo total de proceso: 3%</strong></li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- 6. Objetivo Didáctico -->
+            <section class="bg-blue-50 border-l-4 border-blue-500 p-6 sm:p-8 rounded-r-lg shadow-lg">
+                <h2 class="text-2xl font-bold text-blue-700 mb-4">Resumen del Objetivo Didáctico</h2>
+                <p class="text-blue-900 leading-relaxed text-lg">
+                    El caso permite practicar modelado de <strong>bucles de retrabajo</strong>, uso de <strong>Add-On Processes</strong> y diseño de <strong>experimentos</strong> con análisis estadístico (ICs), además de discutir políticas de prioridad y cuellos de botella.
+                </p>
+            </section>
+
+        </main>
+
+        <!-- Pie de Página -->
+        <footer class="text-center mt-12 mb-6">
+            <p class="text-gray-500 text-sm">Material de clase preparado para la simulación de procesos.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
